@@ -292,7 +292,14 @@ export default function Footer() {
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--neon-mint)' }}>person</span>
-                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.86rem', color: '#fff' }}>Abhishek</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.86rem', color: '#fff' }}>Abhishek Charadva</span>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--neon-mint)' }}>email</span>
+                    <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.86rem', color: '#fff' }}>
+                     charadvaabhi@gmail.com
+                    </span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <span className="material-symbols-outlined" style={{ fontSize: '16px', color: 'var(--primary)' }}>link</span>
