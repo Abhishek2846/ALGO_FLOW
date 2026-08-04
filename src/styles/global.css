@@ -1,0 +1,398 @@
+/* ================================================
+   ALGO FLOW — Global Styles
+   ================================================ */
+@import './variables.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap');
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body-md);
+  color: var(--on-surface);
+  background-color: #08090e;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(110, 107, 244, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(79, 209, 165, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.025) 1px, transparent 0);
+  background-size: auto, auto, 40px 40px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+::-webkit-scrollbar-thumb { background: rgba(110, 107, 244, 0.3); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(110, 107, 244, 0.7); }
+
+/* ── Glass Panel ── */
+.glass-panel {
+  background: rgba(11, 12, 18, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+
+/* ── Neon Glow Utilities ── */
+.glow-violet { box-shadow: var(--glow-violet); }
+.glow-mint   { box-shadow: var(--glow-mint); }
+.glow-amber  { box-shadow: var(--glow-amber); }
+.glow-crimson{ box-shadow: var(--glow-crimson); }
+
+.neon-glow-hover {
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
+}
+.neon-glow-hover:hover {
+  box-shadow: var(--glow-violet);
+  border-color: var(--electric-violet) !important;
+}
+
+/* ── Text utilities ── */
+.font-headline { font-family: var(--font-headline); }
+.font-mono     { font-family: var(--font-mono); }
+.font-body     { font-family: var(--font-body); }
+
+.text-violet  { color: var(--electric-violet); }
+.text-mint    { color: var(--neon-mint); }
+.text-amber   { color: var(--amber-glow); }
+.text-crimson { color: var(--crimson-spark); }
+.text-primary { color: var(--primary); }
+.text-muted   { color: var(--on-surface-variant); }
+
+/* ── Logo Glow ── */
+.logo-glow {
+  text-shadow: 0 0 12px rgba(110, 107, 244, 0.8), 0 0 30px rgba(110, 107, 244, 0.3);
+}
+
+/* ── Gradient text utility ── */
+.gradient-text {
+  background: linear-gradient(135deg, #fff 30%, #6e6bf4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Dot pulse animation ── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 currentColor; }
+  50%       { opacity: 0.7; transform: scale(1.2); box-shadow: 0 0 0 4px transparent; }
+}
+.pulse-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+/* ── Scanning line animation ── */
+@keyframes scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(400%); opacity: 0; }
+}
+
+/* ── Glow pulse animation ── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px currentColor; }
+  50% { box-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+}
+
+/* ── Typewriter cursor ── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--electric-violet);
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+/* ── Fade slide-up page entrance ── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-enter {
+  animation: fadeSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Page layout shell ── */
+.page-shell {
+  margin-left: 0;
+  padding-top: var(--topnav-height);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .page-shell { margin-left: var(--sidebar-width); }
+}
+
+/* ── Main content area wrapper ── */
+.main-content {
+  margin-left: 0;
+  padding-top: var(--topnav-height);
+  min-height: 100vh;
+  position: relative;
+}
+@media (min-width: 768px) {
+  .main-content {
+    margin-left: var(--sidebar-width);
+  }
+}
+
+/* ── Responsive Algorithm Page Content Grid ── */
+.algo-content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.algo-content-grid > * {
+  min-width: 0;
+  max-width: 100%;
+}
+@media (min-width: 1024px) {
+  .algo-content-grid {
+    grid-template-columns: 1fr 380px;
+  }
+}
+@media (min-width: 1440px) {
+  .algo-content-grid {
+    grid-template-columns: 1fr 420px;
+  }
+}
+
+/* ── Responsive Compare Page Grid ── */
+.compare-content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+.compare-content-grid > * {
+  min-width: 0;
+  max-width: 100%;
+}
+@media (min-width: 900px) {
+  .compare-content-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ── Section spacing ── */
+.section-pad { padding: 4rem var(--gutter); }
+@media (max-width: 768px) {
+  .section-pad { padding: 2.5rem 1.25rem; }
+}
+
+/* ── Terminal / Code block ── */
+.code-block {
+  background: rgba(5, 6, 10, 0.95);
+  border: 1px solid rgba(110,107,244,0.15);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-code-md);
+  line-height: 1.8;
+  color: var(--on-surface);
+  overflow-x: auto;
+  position: relative;
+}
+
+/* ── Pseudocode lines with line numbers ── */
+.pseudo-line {
+  display: flex;
+  align-items: flex-start;
+  padding: 1px 12px;
+  color: rgba(255, 255, 255, 0.45);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: pre;
+  counter-increment: line-num;
+  position: relative;
+  font-size: 12px;
+  border-left: 2px solid transparent;
+  gap: 12px;
+}
+.pseudo-line::before {
+  content: counter(line-num, decimal);
+  display: inline-block;
+  min-width: 22px;
+  color: rgba(255,255,255,0.15);
+  font-size: 10px;
+  text-align: right;
+  flex-shrink: 0;
+  user-select: none;
+  padding-top: 1px;
+}
+.pseudo-line.active {
+  background: rgba(110, 107, 244, 0.12);
+  color: #c2c1ff;
+  border-left: 2px solid #6e6bf4;
+  text-shadow: 0 0 8px rgba(110,107,244,0.5);
+}
+.pseudo-line.active::before {
+  color: rgba(110,107,244,0.8);
+}
+.code-block {
+  counter-reset: line-num;
+  padding: 0.75rem 0;
+}
+
+/* ── Algorithm page: hero accent bar ── */
+.algo-hero-bar {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, currentColor 20%, currentColor 80%, transparent);
+  opacity: 0.7;
+  border-radius: 99px;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Stat chip ── */
+.stat-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.stat-chip__label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.stat-chip__value {
+  font-family: var(--font-headline);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+/* ── Visualizer canvas bar ── */
+.viz-bar {
+  flex: 1;
+  border-radius: 3px 3px 0 0;
+  transition: height 0.22s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.15s ease;
+  min-width: 4px;
+}
+
+/* ── Terminal window chrome dots ── */
+.terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.terminal-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+/* ── Complexity row hover ── */
+.complexity-row {
+  transition: background 0.15s;
+  border-radius: 6px;
+}
+.complexity-row:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+/* ── Control button (icon style) ── */
+.ctrl-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0.45rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.6);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+.ctrl-btn:hover:not(:disabled) {
+  background: rgba(110,107,244,0.15);
+  border-color: rgba(110,107,244,0.4);
+  color: #c2c1ff;
+}
+.ctrl-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.ctrl-btn.accent {
+  background: rgba(110,107,244,0.2);
+  border-color: rgba(110,107,244,0.5);
+  color: #c2c1ff;
+}
+.ctrl-btn.accent:hover:not(:disabled) {
+  background: rgba(110,107,244,0.35);
+  box-shadow: 0 0 16px rgba(110,107,244,0.3);
+}
+
+/* ── Bootstrap overrides ── */
+.btn { border-radius: var(--radius-sm) !important; }
+.form-control,
+.form-control:focus {
+  background-color: rgba(5,6,10,0.9) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: rgba(255,255,255,0.85) !important;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  box-shadow: none !important;
+}
+.form-control:focus {
+  border-color: var(--electric-violet) !important;
+  box-shadow: 0 0 0 2px rgba(110, 107, 244, 0.2) !important;
+}
+.form-range::-webkit-slider-thumb { background: var(--electric-violet); }
+.form-range::-webkit-slider-runnable-track { background: rgba(255,255,255,0.1); }
+
+/* ── Breadcrumb ── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+}
+.breadcrumb-item a {
+  color: rgba(255,255,255,0.3);
+  text-decoration: none;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  transition: color 0.15s;
+}
+.breadcrumb-item a:hover { color: rgba(255,255,255,0.7); }
+.breadcrumb-item.active {
+  color: rgba(255,255,255,0.6);
+  font-size: 11px;
+  font-family: var(--font-mono);
+}
+.breadcrumb-item + .breadcrumb-item::before {
+  content: '/';
+  color: rgba(255,255,255,0.15);
+  margin-right: 4px;
+}
