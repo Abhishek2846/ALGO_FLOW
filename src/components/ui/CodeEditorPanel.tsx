@@ -46,25 +46,35 @@ export default function CodeEditorPanel({
         overflow: 'hidden',
         border: '1px solid rgba(255,255,255,0.05)',
         boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
-        position: 'sticky',
-        top: 'calc(var(--topnav-height) + 1.25rem)',
+        width: '100%',
+        minWidth: 0,
       }}
     >
       {/* Editor Header Bar */}
       <div
         style={{
-          padding: '0.6rem 1rem',
+          padding: '0.5rem 0.75rem',
           background: '#0f111a',
           borderBottom: '1px solid rgba(255,255,255,0.05)',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          flexWrap: 'wrap',
           gap: '0.5rem',
         }}
       >
-        {/* Language Tabs */}
-        <div style={{ display: 'flex', gap: '0.25rem', overflowX: 'auto' }}>
+        {/* Language Tabs (Swipeable touch scroll) */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '0.25rem',
+            overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none',
+            flex: 1,
+            minWidth: 0,
+            paddingBottom: 2,
+          }}
+        >
           {languages.map((item) => (
             <button
               key={item.id}
@@ -76,9 +86,11 @@ export default function CodeEditorPanel({
                 color: lang === item.id ? '#fff' : '#64748b',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.75rem',
-                padding: '0.25rem 0.6rem',
+                padding: '0.25rem 0.55rem',
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
               }}
             >
               {item.label}
@@ -95,14 +107,15 @@ export default function CodeEditorPanel({
             border: '1px solid rgba(255,255,255,0.1)',
             borderRadius: '0.4rem',
             color: copied ? '#4fd1a5' : '#94a3b8',
-            padding: '0.25rem 0.6rem',
-            fontSize: '0.75rem',
+            padding: '0.25rem 0.55rem',
+            fontSize: '0.72rem',
             fontFamily: 'var(--font-mono)',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '0.3rem',
             transition: 'all 0.2s',
+            flexShrink: 0,
           }}
         >
           <span className="material-symbols-outlined" style={{ fontSize: '0.9rem' }}>
@@ -115,13 +128,15 @@ export default function CodeEditorPanel({
       {/* Code Area */}
       <div
         style={{
-          padding: '1rem 0',
+          padding: '0.75rem 0',
           background: '#13151f',
-          maxHeight: '500px',
+          maxHeight: '480px',
           overflowY: 'auto',
+          overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
           fontFamily: 'var(--font-mono)',
-          fontSize: '0.85rem',
-          lineHeight: 1.7,
+          fontSize: '0.8rem',
+          lineHeight: 1.65,
         }}
       >
         {currentCodeLines.map((line, i) => {
@@ -131,20 +146,23 @@ export default function CodeEditorPanel({
               key={i}
               style={{
                 display: 'flex',
-                padding: '0 1rem',
+                padding: '0 0.75rem',
                 background: isHighlighted ? `linear-gradient(90deg, ${accentColor}26, transparent)` : 'transparent',
                 borderLeft: `3px solid ${isHighlighted ? accentColor : 'transparent'}`,
                 color: isHighlighted ? '#fff' : '#94a3b8',
                 transition: 'all 0.2s',
+                minWidth: 'max-content',
               }}
             >
               <div
                 style={{
-                  width: '2rem',
+                  width: '1.75rem',
                   textAlign: 'right',
-                  marginRight: '1.5rem',
+                  marginRight: '1rem',
                   color: isHighlighted ? accentColor : '#475569',
                   userSelect: 'none',
+                  flexShrink: 0,
+                  fontSize: '0.75rem',
                 }}
               >
                 {i + 1}

@@ -177,9 +177,9 @@ export default function GraphPageTemplate({ meta, algoType, stepGenerator }: Gra
         
 
         {/* Hero Header */}
-        <motion.div variants={itemVariants} style={{ marginBottom: '3rem', display: 'flex', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'center', justifyContent: 'space-between', background: 'radial-gradient(ellipse at top left, rgba(239, 100, 97, 0.15), transparent 70%)', padding: '2rem', borderRadius: '1rem', border: '1px solid rgba(239, 100, 97, 0.2)', boxShadow: '0 8px 32px rgba(0,0,0,0.4)' }}>
-          <div style={{ flex: '1 1 500px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+        <motion.div variants={itemVariants} style={{ marginBottom: '2.5rem', display: 'flex', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'center', justifyContent: 'space-between', background: 'radial-gradient(ellipse at top left, rgba(239, 100, 97, 0.15), transparent 70%)', padding: 'clamp(1rem, 2.5vw, 2rem)', borderRadius: '1rem', border: '1px solid rgba(239, 100, 97, 0.2)', boxShadow: '0 8px 32px rgba(0,0,0,0.4)' }}>
+          <div style={{ flex: '1 1 280px', minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: '#ef6461', textTransform: 'uppercase', letterSpacing: '0.15em', background: 'rgba(239, 100, 97, 0.1)', padding: '0.25rem 0.75rem', borderRadius: '1rem', border: '1px solid rgba(239, 100, 97, 0.3)' }}>
                 Graph Theory
               </span>
@@ -192,20 +192,20 @@ export default function GraphPageTemplate({ meta, algoType, stepGenerator }: Gra
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#94a3b8' }}>Network Active</span>
               </div>
             </div>
-            <h1 style={{ fontFamily: 'var(--font-headline)', fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 800, margin: '0 0 1rem 0', background: 'linear-gradient(135deg, #ffffff, #ef6461)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '-0.02em' }}>
+            <h1 style={{ fontFamily: 'var(--font-headline)', fontSize: 'clamp(1.8rem, 4vw, 3.5rem)', fontWeight: 800, margin: '0 0 0.75rem 0', background: 'linear-gradient(135deg, #ffffff, #ef6461)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '-0.02em' }}>
               {meta.name}
             </h1>
-            <p style={{ fontSize: '1.1rem', color: '#94a3b8', lineHeight: 1.6, margin: 0, maxWidth: '800px' }}>
+            <p style={{ fontSize: 'clamp(0.92rem, 2vw, 1.05rem)', color: '#94a3b8', lineHeight: 1.6, margin: 0, maxWidth: '800px' }}>
               {meta.description}
             </p>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', minWidth: '200px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: '1 1 180px', minWidth: 'min(100%, 200px)' }}>
             <DifficultyBadge difficulty={meta.difficulty} />
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', background: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.5rem', padding: '0.75rem 1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', background: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.5rem', padding: '0.65rem 0.9rem' }}>
               <span style={{ color: '#64748b' }}>Time</span>
               <span style={{ color: '#f2b84b', fontWeight: 600 }}>{meta.complexity.time}</span>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', background: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.5rem', padding: '0.75rem 1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', background: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '0.5rem', padding: '0.65rem 0.9rem' }}>
               <span style={{ color: '#64748b' }}>Space</span>
               <span style={{ color: '#38bdf8', fontWeight: 600 }}>{meta.complexity.space}</span>
             </div>

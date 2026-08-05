@@ -144,7 +144,7 @@ body {
   display: flex;
   flex-direction: column;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .page-shell { margin-left: var(--sidebar-width); }
 }
 
@@ -154,10 +154,13 @@ body {
   padding-top: var(--topnav-height);
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
+  max-width: 100%;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .main-content {
     margin-left: var(--sidebar-width);
+    max-width: calc(100vw - var(--sidebar-width));
   }
 }
 
@@ -395,4 +398,66 @@ body {
   content: '/';
   color: rgba(255,255,255,0.15);
   margin-right: 4px;
+}
+
+/* ── Mobile-first Enhancements & Media Queries ── */
+@media (max-width: 768px) {
+  :root {
+    --gutter: 1rem;
+    --panel-gap: 0.85rem;
+    --topnav-height: 3.75rem;
+  }
+
+  /* Prevent awkward mobile container overflow */
+  .glass-panel {
+    border-radius: 0.75rem;
+  }
+
+  /* Touch scrolling utilities */
+  .touch-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .touch-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Responsive code & text sizes */
+  .code-block {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .pseudo-line {
+    padding: 2px 8px;
+    gap: 8px;
+    font-size: 11px;
+  }
+
+  /* Mobile buttons & touch target accessibility */
+  button, a {
+    touch-action: manipulation;
+  }
+
+  /* Mobile table responsiveness */
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --gutter: 0.75rem;
+  }
+
+  /* Reduce header text and padding on extra small phones */
+  h1 {
+    font-size: clamp(1.6rem, 6vw, 2.2rem) !important;
+  }
+  h2 {
+    font-size: clamp(1.3rem, 5vw, 1.8rem) !important;
+  }
 }

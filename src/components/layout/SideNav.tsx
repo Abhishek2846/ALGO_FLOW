@@ -1,6 +1,6 @@
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ALGORITHMS } from '../../data/algorithms';
 
 interface SideNavProps {
@@ -134,6 +134,16 @@ export default function SideNav({ mobile = false, onClose }: SideNavProps) {
   const navigate = useNavigate();
   const [hoveredCat, setHoveredCat] = useState<string | null>(null);
   const [expandedCat, setExpandedCat] = useState<string | null>(null);
+  const [lastPath, setLastPath] = useState<string>('');
+
+  useEffect(() => {
+    const activeCat = CATEGORIES.find(cat => location.pathname.startsWith(cat.to));
+    // Auto-expand category if user navigated to a different one
+    if (activeCat && !lastPath.startsWith(activeCat.to)) {
+      setExpandedCat(activeCat.to);
+    }
+    setLastPath(location.pathname);
+  }, [location.pathname]);
 
   return (
     <motion.aside
@@ -146,19 +156,70 @@ export default function SideNav({ mobile = false, onClose }: SideNavProps) {
         left: 0,
         top: mobile ? 0 : 'var(--topnav-height)',
         bottom: 0,
-        width: 'var(--sidebar-width)',
+        width: mobile ? 'min(300px, 85vw)' : 'var(--sidebar-width)',
         display: 'flex',
         flexDirection: 'column',
-        background: 'rgba(10, 11, 16, 0.96)',
+        background: 'rgba(10, 11, 16, 0.98)',
         backdropFilter: 'blur(24px)',
         WebkitBackdropFilter: 'blur(24px)',
         borderRight: '1px solid rgba(255, 255, 255, 0.07)',
         zIndex: 'var(--z-sidebar)' as any,
-        height: mobile ? '100%' : undefined,
+        height: '100%',
         overflowY: 'auto',
         overflowX: 'hidden',
+        WebkitOverflowScrolling: 'touch',
       }}
     >
+      {/* Mobile Drawer Header with Close Button */}
+      {mobile && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '1rem 1rem 0.75rem',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.07)',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div
+              style={{
+                width: 26,
+                height: 26,
+                borderRadius: '6px',
+                background: 'linear-gradient(135deg, #6e6bf4 0%, #4fd1a5 100%)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <span className="material-symbols-outlined" style={{ fontSize: '14px', color: '#fff' }}>hub</span>
+            </div>
+            <span style={{ fontFamily: 'var(--font-headline)', fontSize: '0.95rem', fontWeight: 800, color: '#fff' }}>
+              ALGO<span style={{ color: 'var(--primary)' }}>_FLOW</span>
+            </span>
+          </div>
+
+          <button
+            onClick={onClose}
+            aria-label="Close navigation menu"
+            style={{
+              background: 'rgba(255, 255, 255, 0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '6px',
+              color: 'rgba(255, 255, 255, 0.7)',
+              width: 32,
+              height: 32,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+            }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>close</span>
+          </button>
+        </div>
+      )}
       
       {/* ── Primary Hub Quick Links ── */}
       <div style={{ padding: '0.75rem 0.65rem 0.4rem', display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -306,20 +367,15 @@ export default function SideNav({ mobile = false, onClose }: SideNavProps) {
         {CATEGORIES.map(cat => {
           const isActive = location.pathname.startsWith(cat.to);
           const isHovered = hoveredCat === cat.to;
-          const isExpanded = expandedCat === cat.to || isActive;
+          const isExpanded = expandedCat === cat.to;
 
           return (
             <div key={cat.to}>
               <NavLink
                 to={cat.to}
-                onClick={e => {
-                  if (isExpanded && !isActive) {
-                    e.preventDefault();
-                    setExpandedCat(null);
-                  } else {
-                    setExpandedCat(isExpanded ? null : cat.to);
-                    onClose?.();
-                  }
+                onClick={() => {
+                  setExpandedCat(prev => prev === cat.to ? null : cat.to);
+                  onClose?.();
                 }}
                 style={{ textDecoration: 'none', display: 'block' }}
                 onMouseEnter={() => setHoveredCat(cat.to)}

@@ -101,7 +101,7 @@ export default function AlgoShellPage({ meta }: AlgoShellPageProps) {
         </div>
 
         {/* Pseudocode + complexity grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.5rem' }}>
           {/* Pseudocode */}
           {meta.pseudocode && (
             <div className="glass-panel" style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden' }}>

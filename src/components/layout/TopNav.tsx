@@ -114,8 +114,8 @@ export default function TopNav({ onMenuClick }: TopNavProps) {
           height: 'var(--topnav-height)',
           display: 'flex',
           alignItems: 'center',
-          padding: '0 1.25rem',
-          gap: '1rem',
+          padding: '0 clamp(0.5rem, 2vw, 1.25rem)',
+          gap: 'clamp(0.4rem, 1.5vw, 1rem)',
           background: 'rgba(10, 11, 16, 0.88)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
@@ -135,20 +135,24 @@ export default function TopNav({ onMenuClick }: TopNavProps) {
           }}
         />
 
-        {/* Mobile menu trigger */}
+        {/* Mobile & Tablet menu trigger (< 1024px) */}
         <button
           onClick={onMenuClick}
-          className="d-md-none"
+          className="d-lg-none"
+          aria-label="Open Navigation Menu"
           style={{
             background: 'rgba(255, 255, 255, 0.05)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
             color: 'var(--on-surface)',
             cursor: 'pointer',
             padding: '0.4rem',
+            width: 36,
+            height: 36,
             borderRadius: '8px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            flexShrink: 0,
           }}
         >
           <span className="material-symbols-outlined" style={{ fontSize: '1.25rem' }}>menu</span>
@@ -161,7 +165,7 @@ export default function TopNav({ onMenuClick }: TopNavProps) {
             textDecoration: 'none',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.65rem',
+            gap: '0.5rem',
             flexShrink: 0,
           }}
         >
@@ -169,8 +173,8 @@ export default function TopNav({ onMenuClick }: TopNavProps) {
             whileHover={{ scale: 1.08, rotate: 5 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             style={{
-              width: 32,
-              height: 32,
+              width: 30,
+              height: 30,
               borderRadius: '8px',
               background: 'linear-gradient(135deg, #6e6bf4 0%, #4fd1a5 100%)',
               display: 'flex',
@@ -179,15 +183,15 @@ export default function TopNav({ onMenuClick }: TopNavProps) {
               boxShadow: '0 0 16px rgba(110, 107, 244, 0.55)',
             }}
           >
-            <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#fff' }}>
+            <span className="material-symbols-outlined" style={{ fontSize: '16px', color: '#fff' }}>
               hub
             </span>
           </motion.div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
             <span
               style={{
                 fontFamily: 'var(--font-headline)',
-                fontSize: '1.05rem',
+                fontSize: '0.98rem',
                 fontWeight: 800,
                 letterSpacing: '-0.02em',
                 color: '#fff',
@@ -196,6 +200,7 @@ export default function TopNav({ onMenuClick }: TopNavProps) {
               ALGO<span style={{ color: 'var(--primary)' }}>_FLOW</span>
             </span>
             <span
+              className="d-none d-sm-inline"
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.62rem',
@@ -215,7 +220,7 @@ export default function TopNav({ onMenuClick }: TopNavProps) {
 
         {/* Live Breadcrumb / Active Telemetry Path (Desktop) */}
         <div
-          className="d-none d-md-flex"
+          className="d-none d-lg-flex"
           style={{
             alignItems: 'center',
             gap: '0.4rem',
@@ -257,19 +262,19 @@ export default function TopNav({ onMenuClick }: TopNavProps) {
         <div style={{ flex: 1 }} />
 
         {/* ── Futuristic Spotlight Command Search ── */}
-        <div style={{ position: 'relative', flexShrink: 0 }}>
+        <div style={{ position: 'relative', flexShrink: 1, minWidth: 0 }}>
           <motion.div
             animate={cmdMode ? { scale: 1.01 } : { scale: 1 }}
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '0.5rem',
+              gap: '0.4rem',
               background: cmdMode ? 'rgba(110, 107, 244, 0.12)' : 'rgba(255, 255, 255, 0.04)',
               border: `1px solid ${cmdMode ? 'rgba(110, 107, 244, 0.5)' : 'rgba(255, 255, 255, 0.09)'}`,
               borderRadius: 'var(--radius-full)',
-              padding: '0.35rem 0.85rem',
+              padding: '0.3rem 0.65rem',
               cursor: 'text',
-              width: cmdMode ? 'clamp(260px, 35vw, 420px)' : 'clamp(180px, 20vw, 240px)',
+              width: cmdMode ? 'clamp(200px, 40vw, 420px)' : 'clamp(110px, 18vw, 240px)',
               transition: 'width 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s, background 0.2s',
               boxShadow: cmdMode ? '0 0 20px rgba(110, 107, 244, 0.25)' : 'none',
             }}

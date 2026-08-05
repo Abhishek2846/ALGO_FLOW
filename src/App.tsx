@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import TopNav from './components/layout/TopNav';
 import SideNav from './components/layout/SideNav';
@@ -76,31 +76,53 @@ declare global { interface Window { __MUI?: unknown } }
 
 function Layout({ children }: { children: React.ReactNode }) {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const location = useLocation();
+
+  // Auto-dismiss mobile drawer on route navigation
+  useEffect(() => {
+    setMobileNavOpen(false);
+  }, [location.pathname]);
 
   return (
     <>
       <TopNav onMenuClick={() => setMobileNavOpen(true)} />
 
-      {/* Desktop sidebar — fixed, full height */}
-      <div className="d-none d-md-block">
+      {/* Desktop sidebar — fixed, full height on desktop (≥1024px) */}
+      <div className="d-none d-lg-block">
         <SideNav />
       </div>
 
-      {/* Mobile sidebar overlay */}
-      {mobileNavOpen && (
-        <div
-          style={{
-            position: 'fixed', inset: 0, zIndex: 100,
-            background: 'rgba(0,0,0,0.7)',
-            backdropFilter: 'blur(6px)',
-          }}
-          onClick={() => setMobileNavOpen(false)}
-        >
-          <div onClick={(e) => e.stopPropagation()} style={{ width: 'var(--sidebar-width)', height: '100%', paddingTop: 'var(--topnav-height)' }}>
-            <SideNav mobile onClose={() => setMobileNavOpen(false)} />
-          </div>
-        </div>
-      )}
+      {/* Mobile sidebar overlay with smooth animation */}
+      <AnimatePresence>
+        {mobileNavOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              zIndex: 'var(--z-modal)' as any,
+              background: 'rgba(0, 0, 0, 0.75)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+            }}
+            onClick={() => setMobileNavOpen(false)}
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                width: 'min(300px, 85vw)',
+                height: '100%',
+                boxShadow: '4px 0 24px rgba(0,0,0,0.8)',
+              }}
+            >
+              <SideNav mobile onClose={() => setMobileNavOpen(false)} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── Main content area ── */}
       <main className="main-content">

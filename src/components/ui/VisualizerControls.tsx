@@ -124,8 +124,8 @@ export default function VisualizerControls({
       </div>
 
       {/* Row 2: Array Size + Custom Input */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center', paddingTop: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center', paddingTop: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: '#94a3b8' }}>Size:</span>
           <input
             id="ctrl-array-size"
@@ -133,12 +133,12 @@ export default function VisualizerControls({
             min={4} max={60} step={1}
             value={arraySize}
             onChange={(e) => onArraySizeChange(parseInt(e.target.value, 10))}
-            style={{ width: 90, accentColor: ACCENT }}
+            style={{ width: 80, accentColor: ACCENT }}
           />
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: ACCENT, fontWeight: 600 }}>{arraySize}</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: ACCENT, fontWeight: 600, minWidth: '20px' }}>{arraySize}</span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1, minWidth: 200 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: '1 1 180px', minWidth: 0 }}>
           <input
             id="ctrl-custom-input"
             type="text"
@@ -146,12 +146,12 @@ export default function VisualizerControls({
             value={customVal}
             onChange={(e) => { setCustomVal(e.target.value); setCustomError(''); }}
             onKeyDown={(e) => e.key === 'Enter' && handleCustomInput()}
-            style={{ flex: 1, padding: '0.35rem 0.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.4rem', color: '#fff', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}
+            style={{ flex: 1, minWidth: 0, padding: '0.35rem 0.5rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.4rem', color: '#fff', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }}
           />
           <button
             id="ctrl-set-input"
             onClick={handleCustomInput}
-            style={{ padding: '0.35rem 0.75rem', background: 'rgba(79,209,165,0.15)', border: '1px solid rgba(79,209,165,0.3)', borderRadius: '0.4rem', color: ACCENT, fontFamily: 'var(--font-mono)', fontSize: '0.75rem', cursor: 'pointer', whiteSpace: 'nowrap' }}
+            style={{ padding: '0.35rem 0.75rem', background: 'rgba(79,209,165,0.15)', border: '1px solid rgba(79,209,165,0.3)', borderRadius: '0.4rem', color: ACCENT, fontFamily: 'var(--font-mono)', fontSize: '0.75rem', cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}
           >
             Apply
           </button>
@@ -159,7 +159,7 @@ export default function VisualizerControls({
       </div>
 
       {/* Row 3: Hotkeys Hint Bar */}
-      <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: '#64748b', paddingTop: '0.2rem' }}>
+      <div className="d-none d-sm-flex" style={{ gap: '1rem', flexWrap: 'wrap', fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: '#64748b', paddingTop: '0.2rem' }}>
         <span><kbd style={{ background: 'rgba(255,255,255,0.08)', padding: '1px 5px', borderRadius: 3, color: '#94a3b8' }}>Space</kbd> Play/Pause</span>
         <span><kbd style={{ background: 'rgba(255,255,255,0.08)', padding: '1px 5px', borderRadius: 3, color: '#94a3b8' }}>→</kbd> Step</span>
         <span><kbd style={{ background: 'rgba(255,255,255,0.08)', padding: '1px 5px', borderRadius: 3, color: '#94a3b8' }}>R</kbd> Reset</span>

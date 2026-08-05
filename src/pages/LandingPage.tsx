@@ -116,30 +116,33 @@ export default function LandingPage() {
       {/* ── Floating nav pill ── */}
       {/* Fixed shell owns the centering; motion.nav handles only opacity/y so Framer Motion can't override translateX */}
       <div style={{
-        position: 'fixed', top: '1.25rem', left: 0, right: 0,
+        position: 'fixed', top: '1rem', left: 0, right: 0,
         display: 'flex', justifyContent: 'center',
         zIndex: 999, pointerEvents: 'none',
+        padding: '0 0.75rem',
       }}>
         <motion.nav
           initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           style={{
             pointerEvents: 'auto',
-            display: 'flex', alignItems: 'center', gap: '1.75rem',
-            padding: '0.55rem 1.4rem',
-            background: 'rgba(18,19,26,0.88)', backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(110,107,244,0.2)', borderRadius: '9999px',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-            flexWrap: 'wrap',
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            gap: 'clamp(0.75rem, 2vw, 1.75rem)',
+            padding: '0.45rem clamp(0.75rem, 2vw, 1.4rem)',
+            background: 'rgba(18,19,26,0.92)', backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(110,107,244,0.25)', borderRadius: '9999px',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+            maxWidth: 'calc(100vw - 1.5rem)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexShrink: 0 }}>
             <div style={{ width: 26, height: 26, borderRadius: '50%', background: 'linear-gradient(135deg, #6e6bf4, #4fd1a5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <span className="material-symbols-outlined" style={{ fontSize: '13px', color: '#fff' }}>hub</span>
             </div>
-            <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: '0.88rem', color: '#fff', letterSpacing: '0.06em' }}>ALGO FLOW</span>
+            <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: '0.86rem', color: '#fff', letterSpacing: '0.04em' }}>ALGO FLOW</span>
           </div>
-          <div style={{ display: 'flex', gap: '1.25rem' }}>
+
+          <div className="d-none d-md-flex" style={{ gap: '1.25rem' }}>
             {[{ label: 'Features', href: '#features' }, { label: 'Algorithms', href: '#categories' }, { label: 'About', href: '#about' }].map(({ label, href }) => (
               <a key={label} href={href}
                 style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.78rem', color: 'rgba(199,196,215,0.75)', textDecoration: 'none', letterSpacing: '0.03em', transition: 'color 0.2s' }}
@@ -149,8 +152,9 @@ export default function LandingPage() {
               </a>
             ))}
           </div>
+
           <Link to="/dashboard"
-            style={{ padding: '0.42rem 1.1rem', background: 'linear-gradient(135deg,#6e6bf4,#5855e8)', color: '#fff', borderRadius: '9999px', fontFamily: "'Inter', sans-serif", fontSize: '0.78rem', fontWeight: 600, textDecoration: 'none', boxShadow: '0 0 16px rgba(110,107,244,0.5)', transition: 'box-shadow 0.2s' }}
+            style={{ padding: '0.38rem 0.95rem', background: 'linear-gradient(135deg,#6e6bf4,#5855e8)', color: '#fff', borderRadius: '9999px', fontFamily: "'Inter', sans-serif", fontSize: '0.76rem', fontWeight: 600, textDecoration: 'none', boxShadow: '0 0 16px rgba(110,107,244,0.5)', transition: 'box-shadow 0.2s', whiteSpace: 'nowrap', flexShrink: 0 }}
             onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 28px rgba(110,107,244,0.8)')}
             onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 16px rgba(110,107,244,0.5)')}>
             Launch App →
